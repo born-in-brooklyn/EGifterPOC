@@ -37,4 +37,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="if not exist $(ProjectDir)Browsers\Google\Chrome\Application\chrome.exe (&#xD;&#xA;   powershell Expand-Archive -Force $(ProjectDir)Browsers\Google\Chrome\Application.zip -DestinationPath $(ProjectDir)Browsers\Google\Chrome&#xD;&#xA;)" />
+  </Target>
 </Project>

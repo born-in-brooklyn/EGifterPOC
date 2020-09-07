@@ -46,7 +46,5 @@ namespace EGifterPOC.Steps
         {
             _buyGiftCardsPageObject.ProductGridWidget.Select(brandName);
         }
-
-
     }
 }
