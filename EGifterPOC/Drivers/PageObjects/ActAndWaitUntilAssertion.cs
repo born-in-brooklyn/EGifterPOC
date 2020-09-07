@@ -49,6 +49,21 @@ namespace EGifterPOC.Drivers.PageObjects
             });
         }
 
+        private void ActionAndWaitForElement(Action<RemoteWebDriver> ActAction, string elementToWaitForXPathSelector, string errorMessage)
+        {
+            ActActionAndWaitForAction(d =>
+            {
+                try
+                {
+                    d.FindElementByXPath(elementToWaitForXPathSelector);
+                }
+                catch (NoSuchElementException e)
+                {
+                    ActAction(d);
+                }
+            }, BuildWaitForElementFunc(elementToWaitForXPathSelector), errorMessage);
+        }
+
         private Func<RemoteWebDriver, bool> BuildWaitForElementFunc(string elementToWaitForXPathSelector)
         {
             return d =>
@@ -81,9 +96,9 @@ namespace EGifterPOC.Drivers.PageObjects
                 errorMessage = $"element {elementToWaitForXPathSelector} failed to appear";
             }
 
-            ActActionAndWaitForAction(
+            ActionAndWaitForElement(
                 d => d.Navigate().GoToUrl(urlToGoTo),
-                BuildWaitForElementFunc(elementToWaitForXPathSelector),
+                elementToWaitForXPathSelector,
             errorMessage);
         }
 
@@ -127,9 +142,9 @@ namespace EGifterPOC.Drivers.PageObjects
                 errorMessage = $"element {elementToWaitForXPathSelector} was not found";
             }
 
-            ActActionAndWaitForAction(
+            ActionAndWaitForElement(
                 d => d.FindElementByXPath(elementToClickXPathSelector).Click(),
-                BuildWaitForElementFunc(elementToWaitForXPathSelector),
+                elementToWaitForXPathSelector,
                 errorMessage);
         }
 
@@ -150,9 +165,9 @@ namespace EGifterPOC.Drivers.PageObjects
                 errorMessage = $"element {elementToWaitForXPathSelector} was not found";
             }
 
-            ActActionAndWaitForAction(
+            ActionAndWaitForElement(
                 d => d.FindElementByXPath(fieldXPathSelector).Clear(),
-                BuildWaitForElementFunc(elementToWaitForXPathSelector),
+                elementToWaitForXPathSelector,
                 errorMessage);
         }
 
@@ -178,11 +193,10 @@ namespace EGifterPOC.Drivers.PageObjects
                 errorMessage = $"element {elementToWaitForXPathSelector} was not found";
             }
 
-            ActActionAndWaitForAction(
+            ActionAndWaitForElement(
                 d => d.FindElementByXPath(fieldXPathSelector).SendKeys(keysToSend),
-                BuildWaitForElementFunc(elementToWaitForXPathSelector),
+                elementToWaitForXPathSelector,
                 errorMessage);
         }
-
     }
 }

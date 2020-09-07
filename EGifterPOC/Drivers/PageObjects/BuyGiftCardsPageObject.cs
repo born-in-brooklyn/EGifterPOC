@@ -22,11 +22,13 @@ namespace EGifterPOC.Drivers.PageObjects
             CategoriesMenuWidget = new CategoriesMenuWidget(_actAndWaitUntilAssertion);
             ProductSearchWidget = new ProductSearchWidget(_actAndWaitUntilAssertion);
             ProductGridWidget = new ProductGridWidget(_actAndWaitUntilAssertion);
+            ProductDetailsWidget = new ProductDetailsWidget(_actAndWaitUntilAssertion);
         }
 
         public CategoriesMenuWidget CategoriesMenuWidget { get; }
         public ProductSearchWidget ProductSearchWidget { get; }
         public ProductGridWidget ProductGridWidget { get; }
+        public ProductDetailsWidget ProductDetailsWidget { get; }
 
         public void Load()
         {

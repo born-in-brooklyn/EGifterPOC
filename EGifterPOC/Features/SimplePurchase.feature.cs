@@ -119,6 +119,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 12
  testRunner.And("I select the \"AMC Theatres\" card from the catalog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
+#line 13
+ testRunner.And("I select $50 as the value", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 14
+ testRunner.When("I click the \'Buy for Myself\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
             }
             this.ScenarioCleanup();
         }

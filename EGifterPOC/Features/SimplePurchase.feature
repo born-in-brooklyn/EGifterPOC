@@ -10,3 +10,5 @@ Scenario: Buy a gift for myself as a guest
 	And I select the "Movies & Entertainment" category
 	And I search for "AMC Theatres"
 	And I select the "AMC Theatres" card from the catalog
+	And I select $50 as the value
+	When I click the 'Buy for Myself' button

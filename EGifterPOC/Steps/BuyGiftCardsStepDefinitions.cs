@@ -41,10 +41,22 @@ namespace EGifterPOC.Steps
             _buyGiftCardsPageObject.ProductSearchWidget.ClearSearch();
         }
 
-        [Given(@"I select the ""(.*)"" card from the catalog")]
-        public void GivenISelectTheCardFromTheCatalog(string brandName)
+        [StepDefinition(@"I select the ""(.*)"" card from the catalog")]
+        public void ISelectTheCardFromTheCatalog(string brandName)
         {
             _buyGiftCardsPageObject.ProductGridWidget.Select(brandName);
+        }
+
+        [StepDefinition(@"I select (.*) as the value")]
+        public void ISelectAsTheValue(string value)
+        {
+            _buyGiftCardsPageObject.ProductDetailsWidget.QuickPickDenomination(value);
+        }
+
+        [StepDefinition(@"I click the 'Buy for Myself' button")]
+        public void IClickTheBuyForMyselfButton()
+        {
+            _buyGiftCardsPageObject.ProductDetailsWidget.BuyForMyself();
         }
     }
 }
