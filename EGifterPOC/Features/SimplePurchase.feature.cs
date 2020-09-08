@@ -161,6 +161,9 @@ this.ScenarioInitialize(scenarioInfo);
 #line 23
  testRunner.And("I should see a total amount of $75.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
+#line 24
+ testRunner.And("I proceed to checkout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
             }
             this.ScenarioCleanup();
         }

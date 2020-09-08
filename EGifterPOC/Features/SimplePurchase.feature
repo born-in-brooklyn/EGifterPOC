@@ -21,3 +21,4 @@ Scenario: Buy a gift for myself as a guest
 	| adidas eGift Card       | Myself | $25   | 1        | $25   |
 	And I should see an item total of 2 items
 	And I should see a total amount of $75.00
+	And I proceed to checkout

@@ -41,5 +41,12 @@ namespace EGifterPOC.Steps
             _shoppingCartPageObject.TotalSectionWidget.DoesTotalAmountMatch(expectedTotalAmount).Should().BeTrue();
         }
 
+        [Then(@"I proceed to checkout")]
+        public void ThenIProceedToCheckout()
+        {
+            _shoppingCartPageObject.ProceedToCheckout();
+        }
+
+
     }
 }
