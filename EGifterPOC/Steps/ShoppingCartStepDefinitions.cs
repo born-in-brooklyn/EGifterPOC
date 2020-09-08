@@ -1,0 +1,38 @@
+﻿using EGifterPOC.Drivers.PageObjects;
+using FluentAssertions;
+using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
+
+namespace EGifterPOC.Steps
+{
+    [Binding]
+    public sealed class ShoppingCartStepDefinitions
+    {
+        // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
+        private readonly ShoppingCartPageObject _shoppingCartPageObject;
+
+        public ShoppingCartStepDefinitions(ShoppingCartPageObject shoppingCartPageObject)
+        {
+            _shoppingCartPageObject = shoppingCartPageObject;
+        }
+
+        [Then(@"I should see The following items in my shopping cart:")]
+        public void ThenIShouldSeeTheFollowingItemsInMyShoppingCart(Table table)
+        {
+            var shoppingCartItems = table.CreateSet<ShoppingCartItem>();
+        }
+
+        [Then(@"I should see an item total of (.*) items?")]
+        public void ThenIShouldSeeAnItemTotalOfItems(int expectedItemTotal)
+        {
+            _shoppingCartPageObject.TotalSectionWidget.DoesItemTotalMatch(expectedItemTotal).Should().BeTrue();
+        }
+
+        [Then(@"I should see a total amount of (.*)")]
+        public void ThenIShouldSeeAnItemTotalOfItems(string expectedTotalAmount)
+        {
+            _shoppingCartPageObject.TotalSectionWidget.DoesTotalAmountMatch(expectedTotalAmount).Should().BeTrue();
+        }
+
+    }
+}

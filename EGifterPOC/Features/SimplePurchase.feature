@@ -16,3 +16,4 @@ Scenario: Buy a gift for myself as a guest
 	| Name                    | To     | Value | Quantity |
 	| AMC Theatres eGift Card | Myself | $50   | 1        |
 	And I should see an item total of 1 item
+	And I should see a total amount of $50.00
