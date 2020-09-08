@@ -1,4 +1,5 @@
-﻿using EGifterPOC.Drivers.PageObjects;
+﻿using System.Linq;
+using EGifterPOC.Drivers.PageObjects;
 using FluentAssertions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -19,7 +20,13 @@ namespace EGifterPOC.Steps
         [Then(@"I should see The following items in my shopping cart:")]
         public void ThenIShouldSeeTheFollowingItemsInMyShoppingCart(Table table)
         {
-            var shoppingCartItems = table.CreateSet<ShoppingCartItem>();
+            var shoppingCartItems = table.CreateSet<ShoppingCartItem>().ToArray();
+            shoppingCartItems
+                .Select((sci, i) =>
+                {
+                    return _shoppingCartPageObject.LineItemsWidget.MatchesItemExpectations(i, sci);
+                })
+                .All(v => v==true).Should().BeTrue();
         }
 
         [Then(@"I should see an item total of (.*) items?")]

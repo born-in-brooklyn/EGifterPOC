@@ -129,12 +129,14 @@ this.ScenarioInitialize(scenarioInfo);
                             "Name",
                             "To",
                             "Value",
-                            "Quantity"});
+                            "Quantity",
+                            "Total"});
                 table1.AddRow(new string[] {
                             "AMC Theatres eGift Card",
                             "Myself",
                             "$50",
-                            "1"});
+                            "1",
+                            "$50"});
 #line 15
  testRunner.Then("I should see The following items in my shopping cart:", ((string)(null)), table1, "Then ");
 #line hidden

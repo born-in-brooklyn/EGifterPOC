@@ -17,9 +17,11 @@ namespace EGifterPOC.Drivers.PageObjects
             _actAndWaitUntilAssertion = actAndWaitUntilAssertion;
             _configuration = configuration;
             TotalSectionWidget = new TotalSectionWidget(webDriver);
+            LineItemsWidget = new LineItemsWidget(webDriver, actAndWaitUntilAssertion);
         }
 
         public TotalSectionWidget TotalSectionWidget { get; }
+        public LineItemsWidget LineItemsWidget { get; }
 
         public void Load()
         {
