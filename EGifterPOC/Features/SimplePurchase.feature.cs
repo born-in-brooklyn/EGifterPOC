@@ -123,7 +123,16 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And("I select $50 as the value", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 14
- testRunner.When("I click the \'Buy for Myself\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I click the \'Buy for Myself\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 15
+ testRunner.And("I click \"Buy Gift Cards\" in the Navigation bar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 16
+ testRunner.And("I select the \"adidas\" card from the catalog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 17
+ testRunner.And("I click the \'Buy for Myself\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
@@ -137,14 +146,20 @@ this.ScenarioInitialize(scenarioInfo);
                             "$50",
                             "1",
                             "$50"});
-#line 15
+                table1.AddRow(new string[] {
+                            "adidas eGift Card",
+                            "Myself",
+                            "$25",
+                            "1",
+                            "$25"});
+#line 18
  testRunner.Then("I should see The following items in my shopping cart:", ((string)(null)), table1, "Then ");
 #line hidden
-#line 18
- testRunner.And("I should see an item total of 1 item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 22
+ testRunner.And("I should see an item total of 2 items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 19
- testRunner.And("I should see a total amount of $50.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 23
+ testRunner.And("I should see a total amount of $75.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
