@@ -12,3 +12,7 @@ Scenario: Buy a gift for myself as a guest
 	And I select the "AMC Theatres" card from the catalog
 	And I select $50 as the value
 	When I click the 'Buy for Myself' button
+	Then I should see The following items in my shopping cart:
+	| Name                    | To     | Value | Quantity |
+	| AMC Theatres eGift Card | Myself | $50   | 1        |
+	And I should see an item total of 1 item

@@ -11,19 +11,18 @@ namespace EGifterPOC.Drivers.PageObjects
     public class ActAndWaitUntilAssertion
     {
         private readonly RemoteWebDriver _webDriver;
-        private readonly Configuration _configuration;
 
-        public TimeSpan PauseBetweenActAndAssert { get; set; }
-        public TimeSpan WaitForAssert { get; set; }
         public ActAndWaitUntilAssertion(RemoteWebDriver webDriver, Configuration configuration)
         {
             _webDriver = webDriver;
-            _configuration = configuration;
             PauseBetweenActAndAssert = configuration.DefaultPauseBetweenActAndAssert;
             WaitForAssert = configuration.DefaultWaitForAssert;
         }
 
-        private void ActActionAndWaitForAction(Action<RemoteWebDriver> ActAction,
+        public TimeSpan PauseBetweenActAndAssert { get; set; }
+        public TimeSpan WaitForAssert { get; set; }
+
+        private void ActActionAndWaitForAction(Action<RemoteWebDriver> actAction,
             Func<RemoteWebDriver, bool> waitForAssertFunc, string errorMessage)
         {
             var wait = new DefaultWait<RemoteWebDriver>(_webDriver)
@@ -36,7 +35,7 @@ namespace EGifterPOC.Drivers.PageObjects
             {
                 try
                 {
-                    ActAction(d);
+                    actAction(d);
 
                     Thread.Sleep(PauseBetweenActAndAssert);
 
@@ -49,7 +48,8 @@ namespace EGifterPOC.Drivers.PageObjects
             });
         }
 
-        private void ActionAndWaitForElement(Action<RemoteWebDriver> ActAction, string elementToWaitForXPathSelector, string errorMessage)
+        private void ActionAndWaitForElement(Action<RemoteWebDriver> actAction, string elementToWaitForXPathSelector,
+            string errorMessage)
         {
             ActActionAndWaitForAction(d =>
             {
@@ -57,9 +57,9 @@ namespace EGifterPOC.Drivers.PageObjects
                 {
                     d.FindElementByXPath(elementToWaitForXPathSelector);
                 }
-                catch (NoSuchElementException e)
+                catch (NoSuchElementException)
                 {
-                    ActAction(d);
+                    actAction(d);
                 }
             }, BuildWaitForElementFunc(elementToWaitForXPathSelector), errorMessage);
         }
@@ -85,39 +85,34 @@ namespace EGifterPOC.Drivers.PageObjects
                 {
                     return true;
                 }
+
                 return false;
             };
         }
 
-        public void GoToUrlAndWaitForElement(Uri urlToGoTo, string elementToWaitForXPathSelector, string errorMessage = null)
+        public void GoToUrlAndWaitForElement(Uri urlToGoTo, string elementToWaitForXPathSelector,
+            string errorMessage = null)
         {
             if (string.IsNullOrWhiteSpace(errorMessage))
-            {
                 errorMessage = $"element {elementToWaitForXPathSelector} failed to appear";
-            }
 
             ActionAndWaitForElement(
                 d => d.Navigate().GoToUrl(urlToGoTo),
                 elementToWaitForXPathSelector,
-            errorMessage);
+                errorMessage);
         }
 
-        public void ClickAndWaitForElementAbsence(string elementToClickXPathSelector, string elementToWaitForXPathSelector = null, string errorMessage = null)
+        public void ClickAndWaitForElementAbsence(string elementToClickXPathSelector,
+            string elementToWaitForXPathSelector = null, string errorMessage = null)
         {
             if (string.IsNullOrWhiteSpace(elementToClickXPathSelector))
-            {
                 throw new ArgumentNullException("elementToClickXPathSelector");
-            }
 
             if (string.IsNullOrWhiteSpace(elementToWaitForXPathSelector))
-            {
                 elementToWaitForXPathSelector = elementToClickXPathSelector;
-            }
 
             if (string.IsNullOrWhiteSpace(errorMessage))
-            {
                 errorMessage = $"element {elementToWaitForXPathSelector} is still present";
-            }
 
             ActActionAndWaitForAction(
                 d => d.FindElementByXPath(elementToClickXPathSelector).Click(),
@@ -125,22 +120,17 @@ namespace EGifterPOC.Drivers.PageObjects
                 errorMessage);
         }
 
-        public void ClickAndWaitForElement(string elementToClickXPathSelector, string elementToWaitForXPathSelector = null, string errorMessage = null)
+        public void ClickAndWaitForElement(string elementToClickXPathSelector,
+            string elementToWaitForXPathSelector = null, string errorMessage = null)
         {
             if (string.IsNullOrWhiteSpace(elementToClickXPathSelector))
-            {
                 throw new ArgumentNullException("elementToClickXPathSelector");
-            }
 
             if (string.IsNullOrWhiteSpace(elementToWaitForXPathSelector))
-            {
                 elementToWaitForXPathSelector = elementToClickXPathSelector;
-            }
 
             if (string.IsNullOrWhiteSpace(errorMessage))
-            {
                 errorMessage = $"element {elementToWaitForXPathSelector} was not found";
-            }
 
             ActionAndWaitForElement(
                 d => d.FindElementByXPath(elementToClickXPathSelector).Click(),
@@ -148,22 +138,16 @@ namespace EGifterPOC.Drivers.PageObjects
                 errorMessage);
         }
 
-        public void ClearElementAndWaitForElement(string fieldXPathSelector, string elementToWaitForXPathSelector, string errorMessage)
+        public void ClearElementAndWaitForElement(string fieldXPathSelector, string elementToWaitForXPathSelector,
+            string errorMessage)
         {
-            if (string.IsNullOrWhiteSpace(fieldXPathSelector))
-            {
-                throw new ArgumentNullException("fieldXPathSelector");
-            }
+            if (string.IsNullOrWhiteSpace(fieldXPathSelector)) throw new ArgumentNullException("fieldXPathSelector");
 
             if (string.IsNullOrWhiteSpace(elementToWaitForXPathSelector))
-            {
                 throw new ArgumentNullException("elementToWaitForXPathSelector");
-            }
 
             if (string.IsNullOrWhiteSpace(errorMessage))
-            {
                 errorMessage = $"element {elementToWaitForXPathSelector} was not found";
-            }
 
             ActionAndWaitForElement(
                 d => d.FindElementByXPath(fieldXPathSelector).Clear(),
@@ -171,27 +155,18 @@ namespace EGifterPOC.Drivers.PageObjects
                 errorMessage);
         }
 
-        public void SendKeysToElementAndWaitForElement(string fieldXPathSelector, string keysToSend, string elementToWaitForXPathSelector, string errorMessage)
+        public void SendKeysToElementAndWaitForElement(string fieldXPathSelector, string keysToSend,
+            string elementToWaitForXPathSelector, string errorMessage)
         {
-            if (string.IsNullOrWhiteSpace(fieldXPathSelector))
-            {
-                throw new ArgumentNullException("fieldXPathSelector");
-            }
+            if (string.IsNullOrWhiteSpace(fieldXPathSelector)) throw new ArgumentNullException("fieldXPathSelector");
 
-            if (string.IsNullOrWhiteSpace(keysToSend))
-            {
-                throw new ArgumentNullException("keysToSend");
-            }
+            if (string.IsNullOrWhiteSpace(keysToSend)) throw new ArgumentNullException("keysToSend");
 
             if (string.IsNullOrWhiteSpace(elementToWaitForXPathSelector))
-            {
                 throw new ArgumentNullException("elementToWaitForXPathSelector");
-            }
 
             if (string.IsNullOrWhiteSpace(errorMessage))
-            {
                 errorMessage = $"element {elementToWaitForXPathSelector} was not found";
-            }
 
             ActionAndWaitForElement(
                 d => d.FindElementByXPath(fieldXPathSelector).SendKeys(keysToSend),

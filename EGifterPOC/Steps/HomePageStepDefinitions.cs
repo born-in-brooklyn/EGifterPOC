@@ -1,6 +1,4 @@
-﻿using EGifterPOC.Drivers;
-using EGifterPOC.Drivers.PageObjects;
-using OpenQA.Selenium.Remote;
+﻿using EGifterPOC.Drivers.PageObjects;
 using TechTalk.SpecFlow;
 
 namespace EGifterPOC.Steps
@@ -8,7 +6,6 @@ namespace EGifterPOC.Steps
     [Binding]
     public sealed class HomePageStepDefinitions
     {
-
         // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
         private readonly HomePageObject _homePageObject;
 

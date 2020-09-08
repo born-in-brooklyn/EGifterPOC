@@ -1,18 +1,18 @@
-﻿using System;
-using System.Threading;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support.UI;
-
-namespace EGifterPOC.Drivers.PageObjects
+﻿namespace EGifterPOC.Drivers.PageObjects
 {
     public class ProductSearchWidget
     {
-        private readonly ActAndWaitUntilAssertion _actAndWaitUntilAssertion;
         private const string ContainerXPath = "//div[contains(@class,'giftCardsContainer')]";
         private const string SearchTextBoxXPath = "//input[contains(@class,'searchFieldInput')]";
-        private const string FeaturedCardsHeaderXPath = "//div[contains(@class,'categoryHeader')]/div/h2[contains(text(),'Featured Cards')]";
-        private const string SearchResultHeaderXPath = "//div[contains(@class,'categoryHeader')]/div/h2/span[@key='Search Results']";
+
+        private const string FeaturedCardsHeaderXPath =
+            "//div[contains(@class,'categoryHeader')]/div/h2[contains(text(),'Featured Cards')]";
+
+        private const string SearchResultHeaderXPath =
+            "//div[contains(@class,'categoryHeader')]/div/h2/span[@key='Search Results']";
+
+        private readonly ActAndWaitUntilAssertion _actAndWaitUntilAssertion;
+
         public ProductSearchWidget(ActAndWaitUntilAssertion actAndWaitUntilAssertion)
         {
             _actAndWaitUntilAssertion = actAndWaitUntilAssertion;
@@ -20,12 +20,14 @@ namespace EGifterPOC.Drivers.PageObjects
 
         public void ClearSearch()
         {
-            _actAndWaitUntilAssertion.ClearElementAndWaitForElement(SearchTextBoxXPath, FeaturedCardsHeaderXPath, "featured cards header didn't appear");
+            _actAndWaitUntilAssertion.ClearElementAndWaitForElement(SearchTextBoxXPath, FeaturedCardsHeaderXPath,
+                "featured cards header didn't appear");
         }
 
         public void Search(string toSearchFor)
         {
-            _actAndWaitUntilAssertion.SendKeysToElementAndWaitForElement(SearchTextBoxXPath, toSearchFor,SearchResultHeaderXPath, "search results header didn't appear");
+            _actAndWaitUntilAssertion.SendKeysToElementAndWaitForElement(SearchTextBoxXPath, toSearchFor,
+                SearchResultHeaderXPath, "search results header didn't appear");
         }
 
         private string CategoryTextXPathFragment(string category)
@@ -40,7 +42,8 @@ namespace EGifterPOC.Drivers.PageObjects
 
         private string SelectedCategoryXPathSelector(string category)
         {
-            return $"{ContainerXPath}//li[a[contains(@class,'router-link-exact-active')]{CategoryTextXPathFragment(category)}]";
+            return
+                $"{ContainerXPath}//li[a[contains(@class,'router-link-exact-active')]{CategoryTextXPathFragment(category)}]";
         }
 
         private string NoneSelectedCategoryXPathSelector()
@@ -54,7 +57,7 @@ namespace EGifterPOC.Drivers.PageObjects
             var successXPath = SelectedCategoryXPathSelector(category);
 
             _actAndWaitUntilAssertion.ClickAndWaitForElement(
-                categoryXPath, 
+                categoryXPath,
                 successXPath,
                 $"Couldn't click the {category} category");
         }

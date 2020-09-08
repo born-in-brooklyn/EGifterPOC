@@ -1,10 +1,10 @@
-﻿
-namespace EGifterPOC.Drivers.PageObjects
+﻿namespace EGifterPOC.Drivers.PageObjects
 {
     public class CategoriesMenuWidget
     {
-        private readonly ActAndWaitUntilAssertion _actAndWaitUntilAssertion;
         private const string ContainerXPath = "//div[@class='categoriesMenuComponent']";
+        private readonly ActAndWaitUntilAssertion _actAndWaitUntilAssertion;
+
         public CategoriesMenuWidget(ActAndWaitUntilAssertion actAndWaitUntilAssertion)
         {
             _actAndWaitUntilAssertion = actAndWaitUntilAssertion;
@@ -22,7 +22,8 @@ namespace EGifterPOC.Drivers.PageObjects
 
         private string SelectedCategoryXPathSelector(string category)
         {
-            return $"{ContainerXPath}//li[a[contains(@class,'router-link-exact-active')]{CategoryTextXPathFragment(category)}]";
+            return
+                $"{ContainerXPath}//li[a[contains(@class,'router-link-exact-active')]{CategoryTextXPathFragment(category)}]";
         }
 
         private string NoneSelectedCategoryXPathSelector()
@@ -36,7 +37,7 @@ namespace EGifterPOC.Drivers.PageObjects
             var successXPath = SelectedCategoryXPathSelector(category);
 
             _actAndWaitUntilAssertion.ClickAndWaitForElement(
-                categoryXPath, 
+                categoryXPath,
                 successXPath,
                 $"Couldn't click the {category} category");
         }

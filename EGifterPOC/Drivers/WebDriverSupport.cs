@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BoDi;
-using NUnit.Framework;
+﻿using BoDi;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Remote;
 using TechTalk.SpecFlow;
@@ -15,8 +8,8 @@ namespace EGifterPOC.Drivers
     [Binding]
     public class WebDriverSupport
     {
-        private readonly IObjectContainer _objectContainer;
         private readonly Configuration _configuration;
+        private readonly IObjectContainer _objectContainer;
 
         public WebDriverSupport(IObjectContainer objectContainer, Configuration configuration)
         {

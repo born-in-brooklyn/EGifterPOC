@@ -1,6 +1,4 @@
-﻿using EGifterPOC.Drivers;
-using EGifterPOC.Drivers.PageObjects;
-using OpenQA.Selenium.Remote;
+﻿using EGifterPOC.Drivers.PageObjects;
 using TechTalk.SpecFlow;
 
 namespace EGifterPOC.Steps

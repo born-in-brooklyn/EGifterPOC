@@ -1,15 +1,10 @@
-﻿using System;
-using System.Threading;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support.UI;
-
-namespace EGifterPOC.Drivers.PageObjects
+﻿namespace EGifterPOC.Drivers.PageObjects
 {
     public class ProductGridWidget
     {
-        private readonly ActAndWaitUntilAssertion _actAndWaitUntilAssertion;
         private const string ContainerXPath = "//div[@class ='giftCardCatalog']";
+        private readonly ActAndWaitUntilAssertion _actAndWaitUntilAssertion;
+
         public ProductGridWidget(ActAndWaitUntilAssertion actAndWaitUntilAssertion)
         {
             _actAndWaitUntilAssertion = actAndWaitUntilAssertion;
@@ -17,12 +12,14 @@ namespace EGifterPOC.Drivers.PageObjects
 
         private string BrandNameXPathSelector(string brandName)
         {
-            return $"{ContainerXPath}//div[contains(@class,'brandCardComponent')]//div[contains(@class,'brandName')][contains(text(),'{brandName}')]";
+            return
+                $"{ContainerXPath}//div[contains(@class,'brandCardComponent')]//div[contains(@class,'brandName')][contains(text(),'{brandName}')]";
         }
 
         private string ExpandedBrandNameXPathSelector(string brandName)
         {
-            return $"{ContainerXPath}//div[contains(@class,'expandedCardDetails')]//h3[@class='brandHeading']/a[contains(text(),'{brandName}')]";
+            return
+                $"{ContainerXPath}//div[contains(@class,'expandedCardDetails')]//h3[@class='brandHeading']/a[contains(text(),'{brandName}')]";
         }
 
         public void Select(string brandName)
@@ -31,7 +28,7 @@ namespace EGifterPOC.Drivers.PageObjects
             var successXPath = ExpandedBrandNameXPathSelector(brandName);
 
             _actAndWaitUntilAssertion.ClickAndWaitForElement(
-                categoryXPath, 
+                categoryXPath,
                 successXPath,
                 $"Couldn't select the {brandName} card");
         }

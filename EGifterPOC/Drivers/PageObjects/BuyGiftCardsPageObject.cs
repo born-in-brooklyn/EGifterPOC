@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support.UI;
 using TechTalk.SpecFlow;
 
 namespace EGifterPOC.Drivers.PageObjects
@@ -12,10 +7,11 @@ namespace EGifterPOC.Drivers.PageObjects
     [Binding]
     public class BuyGiftCardsPageObject
     {
-        private readonly Configuration _configuration;
         private readonly ActAndWaitUntilAssertion _actAndWaitUntilAssertion;
+        private readonly Configuration _configuration;
 
-        public BuyGiftCardsPageObject(RemoteWebDriver webDriver, Configuration configuration, ActAndWaitUntilAssertion actAndWaitUntilAssertion)
+        public BuyGiftCardsPageObject(RemoteWebDriver webDriver, Configuration configuration,
+            ActAndWaitUntilAssertion actAndWaitUntilAssertion)
         {
             _actAndWaitUntilAssertion = actAndWaitUntilAssertion;
             _configuration = configuration;
@@ -35,7 +31,7 @@ namespace EGifterPOC.Drivers.PageObjects
             _actAndWaitUntilAssertion.GoToUrlAndWaitForElement(
                 new Uri(_configuration.HomePageUri, "/giftcards"),
                 NavigationBarWidget.HomeTabXPathSelector,
-                "Home page failed to load");
+                "Buy Gift Cards page failed to load");
         }
     }
 }

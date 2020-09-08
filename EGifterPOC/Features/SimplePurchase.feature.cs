@@ -125,6 +125,22 @@ this.ScenarioInitialize(scenarioInfo);
 #line 14
  testRunner.When("I click the \'Buy for Myself\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
+                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Name",
+                            "To",
+                            "Value",
+                            "Quantity"});
+                table1.AddRow(new string[] {
+                            "AMC Theatres eGift Card",
+                            "Myself",
+                            "$50",
+                            "1"});
+#line 15
+ testRunner.Then("I should see The following items in my shopping cart:", ((string)(null)), table1, "Then ");
+#line hidden
+#line 18
+ testRunner.And("I should see an item total of 1 item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
             }
             this.ScenarioCleanup();
         }
