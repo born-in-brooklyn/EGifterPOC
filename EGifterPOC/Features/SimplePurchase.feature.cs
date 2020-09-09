@@ -153,7 +153,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "1",
                             "$25"});
 #line 18
- testRunner.Then("I should see The following items in my shopping cart:", ((string)(null)), table1, "Then ");
+ testRunner.Then("I should see the following items in my shopping cart:", ((string)(null)), table1, "Then ");
 #line hidden
 #line 22
  testRunner.And("I should see an item total of 2 items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -163,6 +163,24 @@ this.ScenarioInitialize(scenarioInfo);
 #line hidden
 #line 24
  testRunner.And("I proceed to checkout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Name",
+                            "Quantity",
+                            "Amount"});
+                table2.AddRow(new string[] {
+                            "AMC Theatres eGift Card",
+                            "1",
+                            "$50"});
+                table2.AddRow(new string[] {
+                            "adidas eGift Card",
+                            "1",
+                            "$25"});
+#line 25
+ testRunner.And("I should see the following items in the checkout summary:", ((string)(null)), table2, "And ");
+#line hidden
+#line 29
+ testRunner.And("I should see Amount Due $75.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

@@ -15,10 +15,15 @@ Scenario: Buy a gift for myself as a guest
 	And I click "Buy Gift Cards" in the Navigation bar
 	And I select the "adidas" card from the catalog
 	And I click the 'Buy for Myself' button
-	Then I should see The following items in my shopping cart:
+	Then I should see the following items in my shopping cart:
 	| Name                    | To     | Value | Quantity | Total |
 	| AMC Theatres eGift Card | Myself | $50   | 1        | $50   |
 	| adidas eGift Card       | Myself | $25   | 1        | $25   |
 	And I should see an item total of 2 items
 	And I should see a total amount of $75.00
 	And I proceed to checkout
+	And I should see the following items in the checkout summary:
+	| Name                    | Quantity | Amount |
+	| AMC Theatres eGift Card | 1        | $50    |
+	| adidas eGift Card       | 1        | $25    |
+	And I should see Amount Due $75.00

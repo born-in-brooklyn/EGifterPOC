@@ -17,7 +17,7 @@ namespace EGifterPOC.Steps
             _shoppingCartPageObject = shoppingCartPageObject;
         }
 
-        [Then(@"I should see The following items in my shopping cart:")]
+        [Then(@"I should see the following items in my shopping cart:")]
         public void ThenIShouldSeeTheFollowingItemsInMyShoppingCart(Table table)
         {
             var shoppingCartItems = table.CreateSet<ShoppingCartItem>().ToArray();
@@ -32,7 +32,7 @@ namespace EGifterPOC.Steps
         [Then(@"I should see an item total of (.*) items?")]
         public void ThenIShouldSeeAnItemTotalOfItems(int expectedItemTotal)
         {
-            _shoppingCartPageObject.TotalSectionWidget.DoesItemTotalMatch(expectedItemTotal).Should().BeTrue();
+            _shoppingCartPageObject.TotalSectionWidget.DoesTotalAmountDueMatch(expectedItemTotal).Should().BeTrue();
         }
 
         [Then(@"I should see a total amount of (.*)")]

@@ -14,7 +14,7 @@ namespace EGifterPOC.Drivers.PageObjects
             _remoteWebDriver = remoteWebDriver;
         }
 
-        public bool DoesItemTotalMatch(int expectedItemTotal)
+        public bool DoesTotalAmountDueMatch(int expectedItemTotal)
         {
             try
             {
