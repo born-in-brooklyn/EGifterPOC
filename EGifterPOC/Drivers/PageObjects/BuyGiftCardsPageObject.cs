@@ -10,15 +10,20 @@ namespace EGifterPOC.Drivers.PageObjects
         private readonly ActAndWaitUntilAssertion _actAndWaitUntilAssertion;
         private readonly Configuration _configuration;
 
-        public BuyGiftCardsPageObject(RemoteWebDriver webDriver, Configuration configuration,
-            ActAndWaitUntilAssertion actAndWaitUntilAssertion)
+        public BuyGiftCardsPageObject(Configuration configuration,
+            ActAndWaitUntilAssertion actAndWaitUntilAssertion,
+            CategoriesMenuWidget categoriesMenuWidget,
+            ProductSearchWidget productSearchWidget,
+            ProductGridWidget productGridWidget,
+            ProductDetailsWidget productDetailsWidget
+            )
         {
             _actAndWaitUntilAssertion = actAndWaitUntilAssertion;
             _configuration = configuration;
-            CategoriesMenuWidget = new CategoriesMenuWidget(_actAndWaitUntilAssertion);
-            ProductSearchWidget = new ProductSearchWidget(_actAndWaitUntilAssertion);
-            ProductGridWidget = new ProductGridWidget(_actAndWaitUntilAssertion);
-            ProductDetailsWidget = new ProductDetailsWidget(_actAndWaitUntilAssertion);
+            CategoriesMenuWidget = categoriesMenuWidget;
+            ProductSearchWidget = productSearchWidget;
+            ProductGridWidget = productGridWidget;
+            ProductDetailsWidget = productDetailsWidget;
         }
 
         public CategoriesMenuWidget CategoriesMenuWidget { get; }

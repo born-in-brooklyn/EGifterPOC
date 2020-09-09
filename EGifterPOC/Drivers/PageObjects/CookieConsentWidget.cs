@@ -9,19 +9,21 @@ namespace EGifterPOC.Drivers.PageObjects
     {
         private const string CookieConsentXPathSelector =
             "//div[@aria-label='cookieconsent']//a[@aria-label='dismiss cookie message']";
+        private const string CookieConsentedXPathSelector =
+            "//div[@aria-label='cookieconsent'and contains(@style,'display: none;')]//a[@aria-label='dismiss cookie message']";
 
-        private readonly RemoteWebDriver _webDriver;
-
-        public CookieConsentWidget(RemoteWebDriver webDriver)
+        private readonly ActAndWaitUntilAssertion _actAndWaitUntilAssertion;
+        public CookieConsentWidget(ActAndWaitUntilAssertion actAndWaitUntilAssertion)
         {
-            _webDriver = webDriver;
+            _actAndWaitUntilAssertion = actAndWaitUntilAssertion;
         }
 
         public void DismissMessage()
         {
-            var toClick = _webDriver.FindElementByXPath(CookieConsentXPathSelector);
-            toClick.Click();
-            Thread.Sleep(2000);
+            _actAndWaitUntilAssertion.ClickAndWaitForElement(
+                CookieConsentXPathSelector,
+                CookieConsentedXPathSelector, 
+                "cookie consent dialog failed to be consented");
         }
     }
 }

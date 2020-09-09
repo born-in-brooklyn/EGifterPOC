@@ -11,15 +11,13 @@ namespace EGifterPOC.Drivers.PageObjects
     {
         private readonly ActAndWaitUntilAssertion _actAndWaitUntilAssertion;
         private readonly Configuration _configuration;
-        private readonly RemoteWebDriver _webDriver;
 
         public CheckoutPageObject(RemoteWebDriver webDriver, Configuration configuration,
             ActAndWaitUntilAssertion actAndWaitUntilAssertion)
         {
-            _webDriver = webDriver;
             _actAndWaitUntilAssertion = actAndWaitUntilAssertion;
             _configuration = configuration;
-            CheckoutSummaryItemsWidget = new CheckoutSummaryItemsWidget(webDriver);
+            CheckoutSummaryItemsWidget = new CheckoutSummaryItemsWidget(actAndWaitUntilAssertion);
         }
 
         public CheckoutSummaryItemsWidget CheckoutSummaryItemsWidget { get; }
@@ -44,10 +42,10 @@ namespace EGifterPOC.Drivers.PageObjects
         {
             try
             {
-                _webDriver.FindElementByXPath($"//section[contains(@class, 'checkoutAmountComponent') and //*[normalize-space(text())='{amountDue}']]");
+                _actAndWaitUntilAssertion.WaitForElementWithRetry($"//section[contains(@class, 'checkoutAmountComponent') and //*[normalize-space(text())='{amountDue}']]");
                 return true;
             }
-            catch (NoSuchElementException)
+            catch (WebDriverTimeoutException)
             {
                 return false;
             }

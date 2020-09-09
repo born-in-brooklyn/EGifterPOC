@@ -9,13 +9,10 @@ namespace EGifterPOC.Drivers.PageObjects
     public class LineItemsWidget
     {
         private const string ContainerXPath = "//div[@class='cartLineItems']";
-
-        private readonly RemoteWebDriver _remoteWebDriver;
         private readonly ActAndWaitUntilAssertion _actAndWaitUntilAssertion;
 
-        public LineItemsWidget(RemoteWebDriver remoteWebDriver, ActAndWaitUntilAssertion actAndWaitUntilAssertion)
+        public LineItemsWidget(ActAndWaitUntilAssertion actAndWaitUntilAssertion)
         {
-            _remoteWebDriver = remoteWebDriver;
             _actAndWaitUntilAssertion = actAndWaitUntilAssertion;
         }
 
@@ -70,10 +67,10 @@ namespace EGifterPOC.Drivers.PageObjects
             try
             {
                 var xpath = MatchesLineItemExpectationsXPath(index, expected);
-                _remoteWebDriver.FindElementByXPath(xpath);
+                _actAndWaitUntilAssertion.WaitForElementWithRetry(xpath);
                 return true;
             }
-            catch (NoSuchElementException)
+            catch (WebDriverTimeoutException)
             {
                 return false;
             }

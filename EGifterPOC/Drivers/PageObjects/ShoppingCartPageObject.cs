@@ -11,13 +11,17 @@ namespace EGifterPOC.Drivers.PageObjects
         private readonly ActAndWaitUntilAssertion _actAndWaitUntilAssertion;
         private readonly Configuration _configuration;
 
-        public ShoppingCartPageObject(RemoteWebDriver webDriver, Configuration configuration,
-            ActAndWaitUntilAssertion actAndWaitUntilAssertion)
+        public ShoppingCartPageObject(
+            RemoteWebDriver webDriver, 
+            Configuration configuration,
+            ActAndWaitUntilAssertion actAndWaitUntilAssertion,
+            TotalSectionWidget totalSectionWidget,
+            LineItemsWidget lineItemsWidget)
         {
             _actAndWaitUntilAssertion = actAndWaitUntilAssertion;
             _configuration = configuration;
-            TotalSectionWidget = new TotalSectionWidget(webDriver);
-            LineItemsWidget = new LineItemsWidget(webDriver, actAndWaitUntilAssertion);
+            TotalSectionWidget = totalSectionWidget;
+            LineItemsWidget = lineItemsWidget;
         }
 
         public TotalSectionWidget TotalSectionWidget { get; }

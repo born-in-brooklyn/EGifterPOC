@@ -73,6 +73,23 @@ namespace EGifterPOC.Drivers.PageObjects
             };
         }
 
+        private void ActionAndWaitForElementAbsence(Action<RemoteWebDriver> actAction, string elementToWaitForXPathSelector,
+            string errorMessage)
+        {
+            ActActionAndWaitForAction(d =>
+            {
+                try
+                {
+                    d.FindElementByXPath(elementToWaitForXPathSelector);
+                }
+                catch (NoSuchElementException)
+                {
+                    return;
+                }
+                actAction(d);
+            }, BuildWaitForElementAbsenceFunc(elementToWaitForXPathSelector), errorMessage);
+        }
+
         private Func<RemoteWebDriver, bool> BuildWaitForElementAbsenceFunc(string elementToWaitForXPathSelector)
         {
             return d =>
@@ -139,7 +156,7 @@ namespace EGifterPOC.Drivers.PageObjects
         }
 
         public void ClearElementAndWaitForElement(string fieldXPathSelector, string elementToWaitForXPathSelector,
-            string errorMessage)
+            string errorMessage = null)
         {
             if (string.IsNullOrWhiteSpace(fieldXPathSelector)) throw new ArgumentNullException("fieldXPathSelector");
 
@@ -156,7 +173,7 @@ namespace EGifterPOC.Drivers.PageObjects
         }
 
         public void SendKeysToElementAndWaitForElement(string fieldXPathSelector, string keysToSend,
-            string elementToWaitForXPathSelector, string errorMessage)
+            string elementToWaitForXPathSelector, string errorMessage = null)
         {
             if (string.IsNullOrWhiteSpace(fieldXPathSelector)) throw new ArgumentNullException("fieldXPathSelector");
 
@@ -170,6 +187,20 @@ namespace EGifterPOC.Drivers.PageObjects
 
             ActionAndWaitForElement(
                 d => d.FindElementByXPath(fieldXPathSelector).SendKeys(keysToSend),
+                elementToWaitForXPathSelector,
+                errorMessage);
+        }
+
+        public void WaitForElementWithRetry(string elementToWaitForXPathSelector, string errorMessage = null)
+        {
+            if (string.IsNullOrWhiteSpace(elementToWaitForXPathSelector))
+                throw new ArgumentNullException("elementToWaitForXPathSelector");
+
+            if (string.IsNullOrWhiteSpace(errorMessage))
+                errorMessage = $"element {elementToWaitForXPathSelector} was not found";
+
+            ActionAndWaitForElement(
+                d => { },
                 elementToWaitForXPathSelector,
                 errorMessage);
         }

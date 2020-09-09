@@ -11,11 +11,11 @@ namespace EGifterPOC.Drivers.PageObjects
     {
         private const string ContainerXPath = "//div[@class='summaryGiftCards']";
 
-        private readonly RemoteWebDriver _remoteWebDriver;
+        private readonly ActAndWaitUntilAssertion _actAndWaitUntilAssertion;
 
-        public CheckoutSummaryItemsWidget(RemoteWebDriver remoteWebDriver)
+        public CheckoutSummaryItemsWidget(ActAndWaitUntilAssertion actAndWaitUntilAssertion)
         {
-            _remoteWebDriver = remoteWebDriver;
+            _actAndWaitUntilAssertion = actAndWaitUntilAssertion;
         }
 
         private string ItemNameXPathFragment(string itemName)
@@ -49,12 +49,10 @@ namespace EGifterPOC.Drivers.PageObjects
         {
             try
             {
-                Thread.Sleep(1000);
-                var xpath = MatchesSummaryItemExpectationsXPath(index, expected);
-                _remoteWebDriver.FindElementByXPath(xpath);
+                _actAndWaitUntilAssertion.WaitForElementWithRetry(MatchesSummaryItemExpectationsXPath(index, expected));
                 return true;
             }
-            catch (NoSuchElementException)
+            catch (WebDriverTimeoutException)
             {
                 return false;
             }
