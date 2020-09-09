@@ -132,7 +132,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And("I select the \"adidas\" card from the catalog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 17
- testRunner.And("I click the \'Buy for Myself\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I click the \'Buy for Myself\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
@@ -181,6 +181,9 @@ this.ScenarioInitialize(scenarioInfo);
 #line hidden
 #line 29
  testRunner.And("I should see Amount Due $75.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 30
+ testRunner.And("I click Continue as Guest", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

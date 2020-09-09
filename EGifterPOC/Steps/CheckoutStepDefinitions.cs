@@ -34,5 +34,11 @@ namespace EGifterPOC.Steps
                 })
                 .All(v => v==true).Should().BeTrue();
         }
+
+        [Then(@"I click Continue as Guest")]
+        public void ThenIClickContinueAsGuest()
+        {
+            _checkoutPageObject.ContinueAsGuest();
+        }
     }
 }

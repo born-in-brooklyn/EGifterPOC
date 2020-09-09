@@ -14,7 +14,7 @@ Scenario: Buy a gift for myself as a guest
 	And I click the 'Buy for Myself' button
 	And I click "Buy Gift Cards" in the Navigation bar
 	And I select the "adidas" card from the catalog
-	And I click the 'Buy for Myself' button
+	When I click the 'Buy for Myself' button
 	Then I should see the following items in my shopping cart:
 	| Name                    | To     | Value | Quantity | Total |
 	| AMC Theatres eGift Card | Myself | $50   | 1        | $50   |
@@ -27,3 +27,4 @@ Scenario: Buy a gift for myself as a guest
 	| AMC Theatres eGift Card | 1        | $50    |
 	| adidas eGift Card       | 1        | $25    |
 	And I should see Amount Due $75.00
+	And I click Continue as Guest
