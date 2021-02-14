@@ -9,7 +9,7 @@
             "//div[contains(@class,'categoryHeader')]/div/h2[contains(text(),'Featured Cards')]";
 
         private const string SearchResultHeaderXPath =
-            "//div[contains(@class,'categoryHeader')]/div/h2/span[@key='Search Results']";
+            "//div[contains(@class,'categoryHeader')]/div/h2/span[@token='Giftcards_SearchResultsHeader']";
 
         private readonly ActAndWaitUntilAssertion _actAndWaitUntilAssertion;
 

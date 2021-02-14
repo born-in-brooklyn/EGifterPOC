@@ -33,8 +33,8 @@ namespace EGifterPOC.Drivers.PageObjects
         public void ContinueAsGuest()
         {
             _actAndWaitUntilAssertion.ClickAndWaitForElement(
-                "//span[@key='Continue as Guest']",
-                "//span[@key='PaymentMethodTiles_Header']",
+                "//span[@token='Continue as Guest']",
+                "//span[@token='PaymentMethodTiles_Header']",
                 "payment methods failed to load");
         }
 

@@ -14,12 +14,12 @@ namespace EGifterPOC.Drivers.PageObjects
             _remoteWebDriver = remoteWebDriver;
         }
 
-        public bool DoesTotalAmountDueMatch(int expectedItemTotal)
+        public bool DoesItemTotalMatch(int expectedItemTotal)
         {
             try
             {
-                _remoteWebDriver.FindElementByXPath(
-                    $"{ContainerXPath}//span[@key='Cart_TotalItems'][text()={expectedItemTotal}]");
+                var selector = $"{ContainerXPath}//span[@token='Cart_TotalItems'][text()='{expectedItemTotal} item(s)']";
+                _remoteWebDriver.FindElementByXPath(selector);
             }
             catch (NoSuchElementException)
             {
@@ -34,7 +34,7 @@ namespace EGifterPOC.Drivers.PageObjects
             try
             {
                 _remoteWebDriver.FindElementByXPath(
-                    $"{ContainerXPath}//div[@class='h2 pull-right'][normalize-space(text())='{expectedTotalAmount}']");
+                    $"{ContainerXPath}//div[@data-testid='Cart_Summary_TotalItemsCost'][normalize-space(text())='{expectedTotalAmount}']");
             }
             catch (NoSuchElementException)
             {

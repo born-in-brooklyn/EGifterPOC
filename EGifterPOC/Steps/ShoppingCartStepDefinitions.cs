@@ -32,13 +32,13 @@ namespace EGifterPOC.Steps
         [Then(@"I should see an item total of (.*) items?")]
         public void ThenIShouldSeeAnItemTotalOfItems(int expectedItemTotal)
         {
-            _shoppingCartPageObject.TotalSectionWidget.DoesTotalAmountDueMatch(expectedItemTotal).Should().BeTrue();
+            _shoppingCartPageObject.TotalSectionWidget.DoesItemTotalMatch(expectedItemTotal).Should().BeTrue("expected item total to be {0}", expectedItemTotal);
         }
 
         [Then(@"I should see a total amount of (.*)")]
-        public void ThenIShouldSeeAnItemTotalOfItems(string expectedTotalAmount)
+        public void ThenIShouldSeeATotalAmountOf(string expectedTotalAmount)
         {
-            _shoppingCartPageObject.TotalSectionWidget.DoesTotalAmountMatch(expectedTotalAmount).Should().BeTrue();
+            _shoppingCartPageObject.TotalSectionWidget.DoesTotalAmountMatch(expectedTotalAmount).Should().BeTrue("expected total amount to be {0}", expectedTotalAmount);
         }
 
         [Then(@"I proceed to checkout")]

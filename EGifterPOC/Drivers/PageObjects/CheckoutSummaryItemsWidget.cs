@@ -20,17 +20,17 @@ namespace EGifterPOC.Drivers.PageObjects
 
         private string ItemNameXPathFragment(string itemName)
         {
-            return $"//p[@class='checkoutSummaryCell' and //*[normalize-space(text())='{itemName}']]";
+            return $"//p[@class='checkoutSummaryCell' and text()[normalize-space(.)='{itemName}']]";
         }
 
         private string QuantityXPathFragment(int quantity)
         {
-            return $"//p[@class='checkoutSummaryCell' and //*[normalize-space(text())='{quantity}']]";
+            return $"//p[@class='checkoutSummaryCell' and text()[normalize-space(.)='{quantity}']]";
         }
 
         private string AmountXPathFragment(string value)
         {
-            return $"//p[contains(@class,'totalAmt') and //*[normalize-space(text())='{value}']]";
+            return $"//p[contains(@class,'totalAmt') and text()[normalize-space(.)='{value}']]";
         }
 
         private string MatchesSummaryItemExpectationsXPath(int index, CheckoutSummaryItem expected)
@@ -49,7 +49,8 @@ namespace EGifterPOC.Drivers.PageObjects
         {
             try
             {
-                _actAndWaitUntilAssertion.WaitForElementWithRetry(MatchesSummaryItemExpectationsXPath(index, expected));
+                var selector = MatchesSummaryItemExpectationsXPath(index, expected);
+                _actAndWaitUntilAssertion.WaitForElementWithRetry(selector);
                 return true;
             }
             catch (WebDriverTimeoutException)

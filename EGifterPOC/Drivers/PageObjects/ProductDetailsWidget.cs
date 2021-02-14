@@ -9,9 +9,9 @@
             "//div[contains(@class,'denominationQuickSelectComponent')]";
 
         private const string BuyForMyselfButtonXPath =
-            ContainerXPath + "//span[@key='GiftCardCatalog_CardDetails_BuyForMyselfButton']";
+            ContainerXPath + "//span[@token='GiftCardCatalog_CardDetails_BuyForMyselfButton']";
 
-        private const string ToMyselfCartItemLabel = "//span[@key='CartLineItem_MyselfLabel']";
+        private const string ToMyselfCartItemLabel = "//span[@token='CartLineItem_MyselfLabel']";
         private readonly ActAndWaitUntilAssertion _actAndWaitUntilAssertion;
 
         public ProductDetailsWidget(ActAndWaitUntilAssertion actAndWaitUntilAssertion)

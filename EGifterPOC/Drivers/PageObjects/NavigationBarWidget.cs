@@ -48,7 +48,7 @@ namespace EGifterPOC.Drivers.PageObjects
 
         private string TabKeyAttributeXPathFragment(Tab tab)
         {
-            return $"[@key='{TabText(tab)}']";
+            return $"[@token='{TabText(tab)}']";
         }
 
         private string TabXPathSelector(Tab tab)

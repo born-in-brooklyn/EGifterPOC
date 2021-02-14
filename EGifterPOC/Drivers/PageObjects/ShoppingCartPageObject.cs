@@ -38,8 +38,8 @@ namespace EGifterPOC.Drivers.PageObjects
         public void ProceedToCheckout()
         {
             _actAndWaitUntilAssertion.ClickAndWaitForElement(
-                "//span[@key='Cart_ProceedToCheckoutButton']",
-                "//span[@key='Checkout_PageTitle']",
+                "//span[@token='Cart_ProceedToCheckoutButton']",
+                "//span[@token='Checkout_PageTitle']",
                 "checkout page failed to load");
         }
     }
